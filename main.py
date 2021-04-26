@@ -8,6 +8,7 @@ Window.size=(360,640)
 class Container(GridLayout):
     numbers = []
     operator = ''
+    dotcount = False
 
     def eqNamber(self):
         try:
@@ -36,16 +37,21 @@ class Container(GridLayout):
                 except Exception:
                     self.ioLable.text='На ноль делить нельзя'
             i +=1
-
-
+        self.dotcount = False
     #clear labale
     def clearLabel(self):
         self.ioLable.text = ''
         self.numbers = [0.0, 0.0]
+        self.dotcount = False
     #print numbers in labale
     def printNumber(self, btn_id):
         self.ioLable.text += btn_id.text
-
+    def printDot(self):
+        if (self.dotcount != True):
+            if self.btn_dot.state == 'normal':
+                self.dotcount = True 
+            self.ioLable.text += self.btn_dot.text
+    
     # function add thwo numbers
     def sumNumber(self):
         self.operator = '+'
@@ -55,6 +61,7 @@ class Container(GridLayout):
             number = 0.0
         self.numbers.append(number)
         self.ioLable.text = ''
+        self.dotcount = False
     # function sub thwo numbers
     def subNumber(self):
         self.operator = '-'
@@ -64,6 +71,7 @@ class Container(GridLayout):
             number = 0.0
         self.numbers.append(number)
         self.ioLable.text = ''
+        self.dotcount = False
     # function mull thwo numbers
     def mullNumber(self):
         self.operator = '*'
@@ -71,8 +79,9 @@ class Container(GridLayout):
             number = float(self.ioLable.text)
         except Exception:
             number = 0.0
-        self.ioLable.text = ''
         self.numbers.append(number)
+        self.ioLable.text = ''
+        self.dotcount = False
 
     # function div thwo numbers
     def divNumber(self):
@@ -81,8 +90,9 @@ class Container(GridLayout):
             number = float(self.ioLable.text)
         except Exception:
             number = 0.0
-        self.ioLable.text = ''
         self.numbers.append(number)
+        self.ioLable.text = ''
+        self.dotcount = False
 
 class CalcApp(App):
     def build(self):
